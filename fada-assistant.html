@@ -43,6 +43,17 @@
             cursor: pointer;
         }
 
+        #listCon::-webkit-scrollbar {
+                width: 5px; /*스크롤바의 너비*/
+            }
+
+        #listCon::-webkit-scrollbar-thumb {
+            background-color: rgb(100, 100, 100); /*스크롤바의 색상*/
+        }
+
+        #listCon::-webkit-scrollbar-track {
+            background-color: rgb(224, 224, 224); /*스크롤바 트랙 색상*/
+        }
     </style>
 </head>
 <body style="font-family:'Malgun Gothic';">
@@ -61,9 +72,9 @@
         <div id="file-content">
             <input id="fileInput" filestyle="" type="file" onchange="upload(event);" accept=".xlsx" data-class-button="btn btn-default" data-class-input="form-control" data-button-text="" data-icon-name="fa fa-upload" class="form-control" tabindex="-1" style="position: fixed; clip: rect(0px 0px 0px 0px);">
             <div class="bootstrap-filestyle input-group">
-                <input type="text" id="userfile" class="form-control" name="userfile" disabled="">
+                <input type="text" id="userfile" class="form-control" name="userfile" disabled="" >
                 <span class="group-span-filestyle input-group-btn" tabindex="0">
-                    <label for="fileInput" class="btn btn-secondary"  style="border-top-left-radius:0;border-bottom-left-radius:0;">파일 업로드
+                    <label for="fileInput" class="btn btn-secondary"  style="border-top-left-radius:0;border-bottom-left-radius:0;text-shadow: 0 0 3px rgb(255, 255, 228);">파일 업로드
                         <span class="glyphicon fa fa-upload"></span>
                     </label>
                 </span>
@@ -73,104 +84,115 @@
 
         <div id="tab-content" style="padding:10px;border:1px solid rgb(211, 211, 211)">
             <ul class="nav nav-tabs mb-3" id="myTab" role="tablist">
-                <li class="nav-item">
-                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#tab1" style="border-top-left-radius:0;border-top-right-radius:0;font-weight: bold;" aria-selected="true">전체</a>
+            <li class="nav-item">
+                <a class="nav-link active" id="home-tab" data-toggle="tab" href="#tab1" style="border-top-left-radius:0;border-top-right-radius:0;font-weight: bold;" aria-selected="true">전체</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="profile-tab" data-toggle="tab" href="#tab2" style="border-top-left-radius:0;border-top-right-radius:0;font-weight: bold;" aria-selected="false">업체별 합격수량 비율</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="contact-tab" data-toggle="tab" href="#tab3" style="border-top-left-radius:0;border-top-right-radius:0;font-weight: bold;" aria-selected="false">기간별 업체별 합격수량</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="contact-tab" data-toggle="tab" href="#tab4" style="border-top-left-radius:0;border-top-right-radius:0;font-weight: bold;" aria-selected="false">기간별 업체별 품목 증가 추이</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#tab2" style="border-top-left-radius:0;border-top-right-radius:0;font-weight: bold;" aria-selected="false">업체별 합격수량 비율</a>
+                <a class="nav-link" id="contact-tab" data-toggle="tab" href="#tab5" style="border-top-left-radius:0;border-top-right-radius:0;font-weight: bold;" aria-selected="false">기간별 제품 합격수량/전년 대비 데이터 추이</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" id="contact-tab" data-toggle="tab" href="#tab3" style="border-top-left-radius:0;border-top-right-radius:0;font-weight: bold;" aria-selected="false">기간별 업체별 합격수량</a>
+                <a class="nav-link" id="contact-tab" data-toggle="tab" href="#tab6" style="border-top-left-radius:0;border-top-right-radius:0;font-weight: bold;" aria-selected="false">건물 착공 데이터 소방품목 데이터 비교</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" id="contact-tab" data-toggle="tab" href="#tab4" style="border-top-left-radius:0;border-top-right-radius:0;font-weight: bold;" aria-selected="false">기간별 업체별 품목 증가 추이</a>
-                    </li>
-                    <li class="nav-item">
-                    <a class="nav-link" id="contact-tab" data-toggle="tab" href="#tab5" style="border-top-left-radius:0;border-top-right-radius:0;font-weight: bold;" aria-selected="false">기간별 제품 합격수량/전년 대비 데이터 추이</a>
-                    </li>
-                    <li class="nav-item">
-                    <a class="nav-link" id="contact-tab" data-toggle="tab" href="#tab6" style="border-top-left-radius:0;border-top-right-radius:0;font-weight: bold;" aria-selected="false">건물 착공 데이터 소방품목 데이터 비교</a>
-                    </li>
-                </ul>
-                <div class="tab-content" id="tabContent" style="border:1px solid rgb(211, 211, 211);padding-top:10px;padding-left:10px;padding-right:10px;">
-                    <div class="tab-pane fade show active" id="tab1">
-                    <!--
-                    <div id="upload-description" style="height:500px;padding-top:200px;text-align:center">
-                    <img src="./resources/img/upload_description.png"></img>
+            </ul>
+            <div class="tab-content" id="tabContent" style="border:1px solid rgb(211, 211, 211);padding-top:10px;padding-left:10px;padding-right:10px;">
+                <div class="tab-pane fade show active" id="tab1">
+
+                    <div class="row" >
+
+                        <!-- Area Chart -->
+                        <div style="width:50%;">
+                            <div class="card shadow mb-4" style="border-radius:0px;">
+                                <!-- Card Header - Dropdown -->
+                                <div
+                                        class="card-header d-flex flex-row align-items-center justify-content-between">
+                                    <img src="./resources/img/header1.png"><!-- <h6 class="m-0 font-weight-bold" style="color:#51545c">업체별 합격수량 비율</h6> -->
+                                </div>
+                                <!-- Card Body -->
+                                <div class="card-body" style="text-align: center;margin:auto;width:100%">
+                                    <div style="width:45%;text-align: left;float:left;height:300px">
+                                        <div id="legend-div-chart1"></div>
+                                    </div>
+                                    <div style="float:left;width:55%;position:relative;height:300px">
+                                        <canvas id="chart1"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Area Chart -->
+                        <div style="width:50%;">
+                            <div class="card shadow mb-4" style="border-radius:0px;">
+                                <!-- Card Header - Dropdown -->
+                                <div class="card-header d-flex flex-row align-items-center justify-conte\nt-between">
+                                        <img src="./resources/img/header2.png">
+                                </div>
+                                <!-- Card Body -->
+                                <div class="card-body" style="text-align: center;margin:auto;width:100%">
+                                    <div style="width:30%;text-align: left;float:left;height:300px">
+                                        <div id="legend-div-chart2"></div>
+                                    </div>
+                                    <div style="float:left;width:70%;position:relative;height:300px">
+                                        <canvas id="chart2"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    -->
 
-                        <div class="row">
+                    <div class="row">
 
-                            <!-- Area Chart -->
-                            <div style="width:50%;">
-                                <div class="card shadow mb-4" style="border-radius:0px;">
-                                    <!-- Card Header - Dropdown -->
-                                    <div
-                                            class="card-header d-flex flex-row align-items-center justify-content-between">
-                                        <img src="./resources/img/header1.png"><!-- <h6 class="m-0 font-weight-bold" style="color:#51545c">업체별 합격수량 비율</h6> -->
-                                    </div>
-                                    <!-- Card Body -->
-                                    <div class="card-body" style="text-align: center;margin:auto;">
-                                       <div><canvas id="chart1"  style="width:100%;height:300px"></canvas></div>
-                                    </div>
+                        <!-- Area Chart -->
+                        <!-- Area Chart -->
+                        <div style="width:50%;">
+                            <div class="card shadow mb-4" style="border-radius:0px;">
+                                <!-- Card Header - Dropdown -->
+                                <div
+                                        class="card-header d-flex flex-row align-items-center justify-content-between">
+                                        <img src="./resources/img/header3.png">
+                                    <div class="dropdown no-arrow"></div>
                                 </div>
-                            </div>
-
-                            <!-- Area Chart -->
-                            <div style="width:50%;">
-                                <div class="card shadow mb-4" style="border-radius:0px;">
-                                    <!-- Card Header - Dropdown -->
-                                    <div
-                                            class="card-header d-flex flex-row align-items-center justify-content-between">
-                                            <img src="./resources/img/header2.png">
-                                        <div class="dropdown no-arrow">
-                                        </div>
-
+                                <!-- Card Body -->
+                                <div class="card-body" style="text-align: center;margin:auto;width:100%">
+                                    <div style="width:30%;text-align: left;float:left;height:300px">
+                                        <div id="legend-div-chart3"></div>
                                     </div>
-                                    <!-- Card Body -->
-                                    <div class="card-body" style="text-align: center;margin:auto;">
-                                        <div id="chart2"></div>
+                                    <div style="float:left;width:70%;position:relative;height:300px">
+                                        <canvas id="chart3"></canvas>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="row">
-
-                            <!-- Area Chart -->
-                            <!-- Area Chart -->
-                            <div style="width:50%;">
-                                <div class="card shadow mb-4" style="border-radius:0px;">
-                                    <!-- Card Header - Dropdown -->
-                                    <div
-                                            class="card-header d-flex flex-row align-items-center justify-content-between">
-                                            <img src="./resources/img/header3.png">
-                                        <div class="dropdown no-arrow"></div>
-                                    </div>
-                                    <!-- Card Body -->
-                                    <div class="card-body">
-                                        <div id="chart3"></div>
-                                    </div>
+                        <!-- Area Chart -->
+                        <div style="width:50%;">
+                            <div class="card shadow mb-4" style="border-radius:0px;">
+                                <!-- Card Header - Dropdown -->
+                                <div
+                                        class="card-header d-flex flex-row align-items-center justify-content-between">
+                                        <img src="./resources/img/header4.png">
+                                    <div class="dropdown no-arrow"></div>
                                 </div>
-                            </div>
-
-                            <!-- Area Chart -->
-                            <div style="width:50%;">
-                                <div class="card shadow mb-4" style="border-radius:0px;">
-                                    <!-- Card Header - Dropdown -->
-                                    <div
-                                            class="card-header d-flex flex-row align-items-center justify-content-between">
-                                            <img src="./resources/img/header4.png">
-                                        <div class="dropdown no-arrow"></div>
+                                <!-- Card Body -->
+                                <div class="card-body" style="text-align: center;margin:auto;width:100%">
+                                    <div style="width:20%;text-align: left;float:left;height:300px">
+                                        <div id="legend-div-chart4"></div>
                                     </div>
-                                    <!-- Card Body -->
-                                    <div class="card-body">
-                                        <div id="chart4"></div>
+                                    <div style="float:left;width:80%;position:relative;height:300px">
+                                        <canvas id="chart4"></canvas>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                    </div>
 
                 </div>
                 <div class="tab-pane fade" id="tab2">
@@ -185,7 +207,7 @@
                 <div class="tab-pane fade" id="tab5">
                     <div style="margin:auto;"><div id="chart4-detail"></div></div>
                 </div>
-              </div>
+            </div>
         </div>
     </div>
 
@@ -210,24 +232,22 @@
     </div>
 </body>
 <script>
-    
+
     var db = new SQL.Database();
-    
+
+    var bgcolorList = [
+        'rgb(255, 99, 132)', 'rgb(54, 162, 235)', 'rgb(255, 205, 86)', 'rgb(75, 192, 192)', 'rgb(255, 159, 64)', 
+        'DarkSalmon','LightCoral','GoldenRod','IndianRed','MediumTurquoise','MistyRose','OliveDrab','PeachPuff',
+        'Peru','SaddleBrown','SeaGreen','Silver','SlateBlue','Tan','Tomato','YellowGreen','DarkSlateBlue','ForestGreen',
+        'DarkViolet','DarkSlateGray','BurlyWood','Aqua','Brown','Chartreuse','Cyan','Crimson',
+        'Chocolate','DarkBlue','DarkKhaki','DarkOrchid','DarkSeaGreen','DeepPink','DeepSkyBlue','Gold',
+        'Indigo','Khaki','LightBlue','Lime','MediumBlue','MediumVioletRed','NavajoWhite','OrangeRed'];
+
     $(document).ready(function(){
     
         db.run("CREATE TABLE _EXCEL1_ORIGIN_DATA (X1_ID, X1_DATE, X1_YEAR, X1_YEAR_MONTH, X1_COMPANY, X1_AMOUNT);");
-    // Insert two rows: (1,111) and (2,222)
-    /*
-    db.run("INSERT INTO test(col1, col2) VALUES ('1','값1')");
-    db.run("INSERT INTO test(col1, col2) VALUES ('2','값2')");
-    // Prepare a statement
-    var stmt = db.prepare("SELECT * FROM test");
-    //var result = stmt.getAsObject(); // {col1:1, col2:111}
-    while(stmt.step()){
-        var data = stmt.getAsObject();
-        alert(JSON.stringify(data));
-    }
-    */
+        db.run("CREATE TABLE _YEAR_MONTH_PROCESSING_DATA (T1_ID, T1_COMPANY, T1_YEAR_MONTH, T1_AMOUNT);");
+
         $("#fileInput").on('change', function(){  // 값이 변경되면
             if(window.FileReader){  // modern browser
                 var filename = $(this)[0].files[0].name;
@@ -288,6 +308,8 @@
     function analysisData(){
         analysisData1();
         analysisData2();
+        analysisData3();
+        analysisData4();
     }
 
     function analysisData1(){
@@ -317,11 +339,12 @@
             let value = companyMap.get(key);
             var fixData = parseFloat(parseFloat(value/sumAmount*100).toFixed(2));
             chart1Labels.push(key+"("+fixData+"%)");
-            chart1Datas.push(fixData);
+            chart1Datas.push(value);
         }
         //alert(chart1Datas.join(","));
         chart1.data.labels = chart1Labels;
         chart1.data.datasets[0].data = chart1Datas;
+        chart1.data.datasets[0].backgroundColor = bgcolorList;
         
         //chart1.data.labels = ["아","로","하"];
         //chart1.data.datasets[0].data = [20,30,50];
@@ -338,12 +361,286 @@
         var maxYear = parsedData1.max_year;
         var minYear = parsedData1.min_year;
 
-          
+        
+        var stmt2 = db.prepare("SELECT DISTINCT X1_YEAR_MONTH FROM _EXCEL1_ORIGIN_DATA ORDER BY X1_YEAR_MONTH DESC LIMIT 12");
+        var stmt3 = db.prepare("SELECT DISTINCT X1_COMPANY FROM _EXCEL1_ORIGIN_DATA");
+
+        var i =0;
+
+        var yearMonthList = [];
+        while(stmt2.step()){
+            var data2 = stmt2.getAsObject();
+            var parsedData2 = JSON.parse(JSON.stringify(data2));
+            var yearMonth = parsedData2.X1_YEAR_MONTH;
+
+            yearMonthList.push(yearMonth);
+        }
+        yearMonthList.sort();
+
+        var companyList = [];
+        while(stmt3.step()){
+            var data3 = stmt3.getAsObject();
+            var parsedData3 = JSON.parse(JSON.stringify(data3));
+            var company = parsedData3.X1_COMPANY;
+
+            companyList.push(company);
+        }
+
+        var datasets = [];
+        for(var j=0; j < companyList.length; j++){
+            var amountList = [];
+            for(var k=0; k<yearMonthList.length; k++){
+                var stmt4 = db.prepare("SELECT IFNULL(SUM(X1_AMOUNT),0) AS amount FROM _EXCEL1_ORIGIN_DATA WHERE X1_YEAR_MONTH = '"+yearMonthList[k]+"' AND X1_COMPANY = '"+companyList[j]+"'");
+                var data4 = stmt4.getAsObject(0);
+                var parsedData4 = JSON.parse(JSON.stringify(data4));
+                var amount = parsedData4.amount;
+                amountList.push(amount);
+            }
+            var dataset = {
+                label : companyList[j],
+                data : amountList,
+                borderColor : bgcolorList[j],
+                backgroundColor : bgcolorList[j],
+                tension: 0.1
+            }
+            datasets.push(dataset);
+        }
+        
+        chart2.data.labels = yearMonthList;
+        chart2.data.datasets = datasets;
+        chart2.update();
+        //chart2.resize();
+    }
+
+    function analysisData3(){
+        var stmt1 = db.prepare("SELECT MAX(X1_YEAR) AS max_year ,MIN(X1_YEAR) AS min_year FROM _EXCEL1_ORIGIN_DATA");
+        var data1 = stmt1.getAsObject(0);
+        var parsedData1 = JSON.parse(JSON.stringify(data1));
+        var maxYear = parsedData1.max_year;
+        var minYear = parsedData1.min_year;
+
+        var stmt2 = db.prepare("SELECT DISTINCT X1_YEAR FROM _EXCEL1_ORIGIN_DATA ORDER BY X1_YEAR DESC LIMIT 10");
+        var stmt3 = db.prepare("SELECT DISTINCT X1_COMPANY FROM _EXCEL1_ORIGIN_DATA");
+
+        var i =0;
+
+        var yearList = [];
+        while(stmt2.step()){
+            var data2 = stmt2.getAsObject();
+            var parsedData2 = JSON.parse(JSON.stringify(data2));
+            var year = parsedData2.X1_YEAR;
+
+            yearList.push(year);
+        }
+        yearList.sort();
+
+        var companyList = [];
+        while(stmt3.step()){
+            var data3 = stmt3.getAsObject();
+            var parsedData3 = JSON.parse(JSON.stringify(data3));
+            var company = parsedData3.X1_COMPANY;
+
+            companyList.push(company);
+        }
+
+        var datasets = [];
+        for(var j=0; j < companyList.length; j++){
+            var amountList = [];
+            for(var k=0; k<yearList.length; k++){
+                var stmt4 = db.prepare("SELECT IFNULL(SUM(X1_AMOUNT),0) AS amount FROM _EXCEL1_ORIGIN_DATA WHERE X1_YEAR = '"+yearList[k]+"' AND X1_COMPANY = '"+companyList[j]+"'");
+                var data4 = stmt4.getAsObject(0);
+                var parsedData4 = JSON.parse(JSON.stringify(data4));
+                var amount = parsedData4.amount;
+                amountList.push(amount);
+            }
+            var dataset = {
+                label : companyList[j],
+                data : amountList,
+                backgroundColor : bgcolorList[j],
+            }
+            datasets.push(dataset);
+        }
+        
+        chart3.data.labels = yearList;
+        chart3.data.datasets = datasets;
+        chart3.update();
+    }
+
+
+    function analysisData4(){
+        var stmt1 = db.prepare("SELECT MAX(X1_YEAR) AS max_year ,MIN(X1_YEAR) AS min_year FROM _EXCEL1_ORIGIN_DATA");
+        var data1 = stmt1.getAsObject(0);
+        var parsedData1 = JSON.parse(JSON.stringify(data1));
+        var maxYear = parsedData1.max_year;
+        var minYear = parsedData1.min_year;
+
+        var stmt2 = db.prepare("SELECT X1_YEAR, IFNULL(SUM(X1_AMOUNT),0) AS X1_AMOUNT FROM _EXCEL1_ORIGIN_DATA GROUP BY X1_YEAR ORDER BY X1_YEAR DESC LIMIT 10");
+
+        var dataMap = new Map();
+        
+        var yearList = [];
+        while(stmt2.step()){
+            var data2 = stmt2.getAsObject();
+            var parsedData2 = JSON.parse(JSON.stringify(data2));
+            var _year = parsedData2.X1_YEAR;
+            var _amount = parsedData2.X1_AMOUNT;
+            yearList.push(_year);
+            dataMap.set(_year,_amount);
+        }
+        yearList.sort();
+        
+        var prevYear = yearList[0]-1;
+        var stmt3 = db.prepare("SELECT IFNULL(SUM(X1_AMOUNT),0) AS X1_PREV_AMOUNT FROM _EXCEL1_ORIGIN_DATA WHERE X1_YEAR = '"+prevYear+"'");
+        var data3 = stmt3.getAsObject(0);
+        var parsedData3 = JSON.parse(JSON.stringify(data3));
+        var prevAmount = parsedData3.X1_PREV_AMOUNT;
+
+
+        var amountList = [];
+        var buildingAreaList = [];
+        var compareRateList = [];
+        for(var key of yearList){
+            amountList.push(dataMap.get(key));
+            if(_BUILDING_AREA_DATA.has(key)){
+                buildingAreaList.push(_BUILDING_AREA_DATA.get(key));
+            }else{
+                buildingAreaList.push(0);
+            }
+
+            var rate = 0;
+            if(key-1 == prevYear){
+                rate = ((dataMap.get(key)-prevAmount)/dataMap.get(key))*100;
+                compareRateList.push(rate.toFixed(2));
+            }else{
+                rate = ((dataMap.get(key)-dataMap.get((key-1)+""))/dataMap.get(key))*100;
+                compareRateList.push(rate.toFixed(2));
+            }
+        }
+
+
+
+
+        var datasets = [];
+        var dataset1 = {
+            type: 'bar',
+            label: '합계(개)',
+            data: amountList,
+            yAxisID: 'A',
+            backgroundColor : 'rgb(54, 162, 235)',
+            borderColor : 'rgb(54, 162, 235)',
+            tension: 0.1
+        }
+        var dataset2 = {
+            type: 'line',
+            label: '전년대비(%)',
+            data: compareRateList,
+            yAxisID: 'B',
+            backgroundColor : 'rgb(255, 99, 132)',
+            borderColor : 'rgb(255, 99, 132)',
+            tension: 0.1
+        }
+        var dataset3 = {
+            type: 'line',
+            label: '착공면적(천㎡)',
+            data: buildingAreaList,
+            backgroundColor : 'rgb(255, 205, 86)',
+            borderColor : 'rgb(255, 205, 86)',
+            tension: 0.1
+        }
+        datasets.push(dataset1);
+        datasets.push(dataset2);
+        datasets.push(dataset3);
+
+        chart4.data.labels = yearList;
+        chart4.data.datasets = datasets;
+        chart4.update();
     }
 </script>
 <script>
 
     Chart.register(ChartDataLabels);
+    
+    const getOrCreateLegendList = (chart, id) => {
+        const legendContainer = document.getElementById(id);
+        let listContainer = legendContainer.querySelector('ul');
+
+        if (!listContainer) {
+            listContainer = document.createElement('ul');
+            //listContainer.style.display = 'flex';
+            listContainer.id = "listCon"
+            listContainer.style.paddingLeft= '0px';
+            listContainer.style.height = '300px';
+            listContainer.style.overflow = 'auto';
+            listContainer.style.fontSize = '12px';
+            listContainer.style.flexDirection = 'row';
+            listContainer.style.margin = 0;
+            listContainer.style.paddingTop = 0;
+
+            legendContainer.appendChild(listContainer);
+        }
+
+        return listContainer;
+    };
+
+    const htmlLegendPlugin = {
+        id: 'htmlLegend',
+        afterUpdate(chart, args, options) {
+            const ul = getOrCreateLegendList(chart, options.containerID);
+
+            // Remove old legend items
+            while (ul.firstChild) {
+                ul.firstChild.remove();
+            }
+
+            // Reuse the built-in legendItems generator
+            const items = chart.options.plugins.legend.labels.generateLabels(chart);
+
+            items.forEach(item => {
+                const li = document.createElement('li');
+                li.style.alignItems = 'left';
+                li.style.cursor = 'pointer';
+                li.style.display = 'flex';
+                li.style.flexDirection = 'row';
+                li.style.marginLeft = '0px';
+
+                li.onclick = () => {
+                const {type} = chart.config;
+                if (type === 'pie' || type === 'doughnut') {
+                    // Pie and doughnut charts only have a single dataset and visibility is per item
+                    chart.toggleDataVisibility(item.index);
+                } else {
+                    chart.setDatasetVisibility(item.datasetIndex, !chart.isDatasetVisible(item.datasetIndex));
+                }
+                chart.update();
+                };
+
+                // Color box
+                const boxSpan = document.createElement('span');
+                boxSpan.style.background = item.fillStyle;
+                boxSpan.style.borderColor = item.strokeStyle;
+                boxSpan.style.borderWidth = item.lineWidth + 'px';
+                boxSpan.style.display = 'inline-block';
+                boxSpan.style.height = '17px';
+                boxSpan.style.marginRight = '10px';
+                boxSpan.style.marginBottom = '2px';
+                boxSpan.style.width = '17px';
+
+                // Text
+                const textContainer = document.createElement('p');
+                textContainer.style.color = item.fontColor;
+                textContainer.style.margin = 0;
+                textContainer.style.padding = 0;
+                textContainer.style.textDecoration = item.hidden ? 'line-through' : '';
+
+                const text = document.createTextNode(item.text);
+                textContainer.appendChild(text);
+
+                li.appendChild(boxSpan);
+                li.appendChild(textContainer);
+                ul.appendChild(li);
+            });
+        }
+    };
 
     var chart1 = new Chart(document.getElementById("chart1"), {
         type: 'pie',
@@ -364,60 +661,250 @@
             },
         options: {
             layout: {
+                padding: {
+                    top: 30,
+                    bottom:30,
+                    left:30,
+                    right:30
+                }
+            },
+            title: {
+                display: false
+            },
+            plugins: {
+                legend: {
+                    display: false
+                },
+                htmlLegend: {
+                    containerID: 'legend-div-chart1',
+                },
+                datalabels: {
+                    anchor:'end',
+                    align:'end',
+                    backgroundColor: function (context) {
+                        return context.dataset.backgroundColor;
+                    },
+                    borderColor: 'white',
+                    borderRadius: 3,
+                    borderWidth: 0,
+                    color: function (context) {
+                        return context.hovered ? 'black' : 'black'
+                    },
+                    font: {
+                        weight: 'bold'
+                    },
+                    listeners: {
+                        enter: function (context) {
+                            context.hovered = true;
+                            return true;
+                        },
+                        leave: function (context) {
+                            context.hovered = false;
+                            return true;
+                        }
+                    },
+                    display: true,
+                    formatter: function (value, ctx) {
+                        let datasets = ctx.chart.data.datasets[0].data;
+                        if(value !=0){
+                            let sum =0;
+                            dataArr = ctx.chart.data.datasets[0].data;
+                            dataArr.map(data => {
+                                sum += parseInt(data);
+                            });
+                            let percentage = parseFloat(parseFloat(value*100/sum).toFixed(2))+"%";
+                            return percentage;
+                        }else{
+                            let percentage = "";
+                            return percentage;
+                        }
+                    }.bind(this)
+                },
+            },
+            responsive: true,
+            maintainAspectRatio: false
+        },
+        plugins: [htmlLegendPlugin]
+    });
+
+    var chart2 = new Chart(document.getElementById("chart2"), {
+        type: 'line',
+        data: {
+            labels: [
+                '레이블'
+            ],
+            datasets: [{
+                label: 'My First Dataset',
+                data: [65, 59, 80, 81, 56, 55, 40],
+                fill: false,
+                borderColor: 'rgb(75, 192, 192)',
+                tension: 0.1
+            }]
+        },
+        options: {
+            layout: {
             padding: {
                 top: 30,
                 bottom:30,
                 left:30,
                 right:30
-            }
-        },
-            title: {
-                display: false
+                }
             },
-            responsive: false,
             plugins: {
-                    legend: {
-                        display: true,
-                        position : 'left',
-                        fullSize : true,
-                        labels : {
-                            usePointStyle : true,
-                            padding :7
-                        }
-                    },
-                    datalabels: {
-                        anchor:'end',
-                        align:'end',
-                        backgroundColor: function (context) {
-                            return context.dataset.backgroundColor;
-                        },
-                        borderColor: 'white',
-                        borderRadius: 3,
-                        borderWidth: 0,
-                        color: function (context) {
-                            return context.hovered ? 'black' : 'black'
-                        },
-                        font: {
-                            weight: 'bold'
-                        },
-                        listeners: {
-                            enter: function (context) {
-                                context.hovered = true;
-                                return true;
-                            },
-                            leave: function (context) {
-                                context.hovered = false;
-                                return true;
-                            }
-                        },
-                        display: true,
-                        formatter: function (value, context) {
-                            let percentage = context.dataset.data[0] + "%";
-                            return percentage;
-                        }.bind(this)
-                    },
+                datalabels: {
+                    display: false
                 },
-        }
+                legend: {
+                    display: false,
+                },
+                htmlLegend: {
+                    containerID: 'legend-div-chart2',
+                }
+            },
+            responsive: true,
+            maintainAspectRatio: false
+        },
+        plugins: [htmlLegendPlugin]
+    });
+
+    var chart3 = new Chart(document.getElementById("chart3"), {
+        type: 'bar',
+        data: {
+            labels: [
+                '레이블1','레이블2','레이블3','레이블4','레이블5','레이블6'
+            ],
+            datasets: [{
+                label: 'My First Dataset',
+                data: [65, 59, 80, 81, 56, 55, 40],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(255, 159, 64, 0.2)',
+                    'rgba(255, 205, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(201, 203, 207, 0.2)'
+                ],
+                borderColor: [
+                    'rgb(255, 99, 132)',
+                    'rgb(255, 159, 64)',
+                    'rgb(255, 205, 86)',
+                    'rgb(75, 192, 192)',
+                    'rgb(54, 162, 235)',
+                    'rgb(153, 102, 255)',
+                    'rgb(201, 203, 207)'
+                ],
+                borderWidth: 1
+            },
+            {
+                label: 'My First Dataset2',
+                data: [34, 29, 50, 31, 26, 15, 50],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(255, 159, 64, 0.2)',
+                    'rgba(255, 205, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(201, 203, 207, 0.2)'
+                ],
+                borderColor: [
+                    'rgb(255, 99, 132)',
+                    'rgb(255, 159, 64)',
+                    'rgb(255, 205, 86)',
+                    'rgb(75, 192, 192)',
+                    'rgb(54, 162, 235)',
+                    'rgb(153, 102, 255)',
+                    'rgb(201, 203, 207)'
+                ],
+                borderWidth: 1
+            }
+        ]
+        },
+        options: {
+            layout: {
+            padding: {
+                top: 30,
+                bottom:30,
+                left:30,
+                right:30
+                }
+            },
+            plugins: {
+                datalabels: {
+                    display: false
+                },
+                legend: {
+                    display: false,
+                },
+                htmlLegend: {
+                    containerID: 'legend-div-chart3',
+                }
+            },
+            responsive: true,
+            maintainAspectRatio: false,
+            barThickness: 3
+        },
+        plugins: [htmlLegendPlugin]
+    });
+
+
+    var chart4 = new Chart(document.getElementById("chart4"), {
+        type: 'line',
+        data: {
+            labels: ['January', 'February', 'March', 'April'],
+            datasets: [{
+                type: 'bar',
+                label: 'Bar Dataset',
+                data: [10, 20, 30, 40]
+            }, {
+                type: 'line',
+                label: 'Line Dataset',
+                data: [50, 50, 50, 50],
+            }]
+        },
+        options: {
+            layout: {
+            padding: {
+                top: 30,
+                bottom:30,
+                left:30,
+                right:30
+                }
+            },
+            plugins: {
+                datalabels: {
+                    display: false
+                },
+                legend: {
+                    display: false,
+                },
+                htmlLegend: {
+                    containerID: 'legend-div-chart4',
+                }
+            },
+            scales: {
+                A:{
+                        display: true,
+                        type:'linear',
+                        position:'right',
+                        //ticks: { beginAtZero: true, color: 'blue' },
+                        //grid: { display: false }
+                    },
+                B: {
+                        display: true,
+                        type:'linear',
+                        position:'left',
+                        //ticks: { beginAtZero: true, color: 'blue' },
+                        grid: { display: false }
+                    }
+                
+            },
+            responsive: true,
+            maintainAspectRatio: false,
+            barThickness: 10
+        },
+        plugins: [htmlLegendPlugin]
     });
 </script>
 </html>
