@@ -12,7 +12,7 @@
     <script src="./resources/vendor/bootstrap/js/bootstrap.min.js"></script>
     <script src="./resources/vendor/jquery-easing/jquery.easing.min.js"></script>
     <!-- <link rel="icon" type="image/png" sizes="192x192"  href="/resources/img/ms-icon-70x70.png"> -->
-    <script src="./resources/vendor/html2canvas/html2canvas.js"></script>
+    <script type="text/javascript" src="./resources/vendor/html2canvas/html2canvas.js"></script>
 
     <script src="./resources/vendor/chart.js/chart.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.0.0/dist/chart.min.js"></script>
@@ -39,7 +39,7 @@
             border: 1px solid transparent;}
 
         label:hover {
-            color: #2e9cdf;
+            color: #000000;
             cursor: pointer;
         }
 
@@ -82,27 +82,30 @@
         </div>
         <hr>
 
-        <div id="tab-content" style="padding:10px;border:1px solid rgb(211, 211, 211)">
-            <ul class="nav nav-tabs mb-3" id="myTab" role="tablist">
-            <li class="nav-item">
-                <a class="nav-link active" id="home-tab" data-toggle="tab" href="#tab1" style="border-top-left-radius:0;border-top-right-radius:0;font-weight: bold;" aria-selected="true">전체</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" id="profile-tab" data-toggle="tab" href="#tab2" style="border-top-left-radius:0;border-top-right-radius:0;font-weight: bold;" aria-selected="false">업체별 합격수량 비율</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" id="contact-tab" data-toggle="tab" href="#tab3" style="border-top-left-radius:0;border-top-right-radius:0;font-weight: bold;" aria-selected="false">기간별 업체별 합격수량</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" id="contact-tab" data-toggle="tab" href="#tab4" style="border-top-left-radius:0;border-top-right-radius:0;font-weight: bold;" aria-selected="false">기간별 업체별 품목 증가 추이</a>
-                </li>
-                <li class="nav-item">
-                <a class="nav-link" id="contact-tab" data-toggle="tab" href="#tab5" style="border-top-left-radius:0;border-top-right-radius:0;font-weight: bold;" aria-selected="false">기간별 제품 합격수량/전년 대비 데이터 추이</a>
-                </li>
-                <li class="nav-item">
-                <a class="nav-link" id="contact-tab" data-toggle="tab" href="#tab6" style="border-top-left-radius:0;border-top-right-radius:0;font-weight: bold;" aria-selected="false">건물 착공 데이터 소방품목 데이터 비교</a>
-                </li>
-            </ul>
+        <div id="tab-content" style="padding:10px;border:1px solid rgb(211, 211, 211);">
+            <div  style="width:75%;display: inline-block">
+                <ul class="nav nav-tabs mb-3" id="myTab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="dashboard-tab" data-toggle="tab" href="#tab1" style="border-top-left-radius:0;border-top-right-radius:0;font-weight: bold;" aria-selected="true">전체</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="chart1-tab" data-toggle="tab" href="#tab2" style="border-top-left-radius:0;border-top-right-radius:0;font-weight: bold;" aria-selected="false">업체별 합격 수량 비율</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="chart2-tab" data-toggle="tab" href="#tab3" style="border-top-left-radius:0;border-top-right-radius:0;font-weight: bold;" aria-selected="false">기간별/업체별 합격 수량</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="chart3-tab" data-toggle="tab" href="#tab4" style="border-top-left-radius:0;border-top-right-radius:0;font-weight: bold;" aria-selected="false">기간별/업체별 품목 증가 추이</a>
+                    </li>
+                    <li class="nav-item">
+                    <a class="nav-link" id="chart4-tab" data-toggle="tab" href="#tab5" style="border-top-left-radius:0;border-top-right-radius:0;font-weight: bold;" aria-selected="false">기간별 합격 수량 증감 추이/건물 착공 데이터 비교</a>
+                    </li>
+                </ul>
+            </div>
+            <div style="width:24%;display: inline-block;text-align:right">
+                <a id="screenshot" onclick="screenshot();" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" style="height:33px;margin-top:5px;margin-left:10px;display:block;margin-bottom:10px">
+                <i class="fas fa-download fa-sm text-white-50"></i>스크린샷 저장</a>
+            </div>
             <div class="tab-content" id="tabContent" style="border:1px solid rgb(211, 211, 211);padding-top:10px;padding-left:10px;padding-right:10px;">
                 <div class="tab-pane fade show active" id="tab1">
 
@@ -257,15 +260,52 @@
             }
 
             // 추출한 파일명 삽입
-            //$("#userfile").val(filename);
+            $("#userfile").val(filename);
         });
 
         $('#myTab a').on('click', function (event) {
                 event.preventDefault()
                 $(this).tab('show')
         });
-    
+
+
     });
+
+    function screenshot(){
+
+        let scrollHeight = Math.max(
+                document.body.scrollHeight, document.documentElement.scrollHeight,
+                document.body.offsetHeight, document.documentElement.offsetHeight,
+                document.body.clientHeight, document.documentElement.clientHeight
+            );
+
+            alert( window.innerWidth);
+            html2canvas($("#tab1")[0]).then((canvas) => {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+                document.body.appendChild(canvas);
+            });
+
+    }
+
+    function print(){
+        var mywindow = window.open('', 'PRINT', 'height=400,width=600');
+
+        mywindow.document.write('<html><head><title>' + document.title  + '</title>');
+        mywindow.document.write('</head><body >');
+        mywindow.document.write('<h1>' + document.title  + '</h1>');
+        mywindow.document.write(document.getElementById('tab1').innerHTML);
+        mywindow.document.write('</body></html>');
+
+        mywindow.document.close(); // necessary for IE >= 10
+        mywindow.focus(); // necessary for IE >= 10*/
+
+        mywindow.print();
+        mywindow.close();
+
+        return true;
+    }
+
 
     function showInfo(){
         $("#info-modal").modal('show');
