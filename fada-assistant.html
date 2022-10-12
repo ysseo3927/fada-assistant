@@ -1,4 +1,3 @@
-<!-- Fire Apparatus Data Analysis -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,7 +10,7 @@
     
     <script src="./resources/vendor/bootstrap/js/bootstrap.min.js"></script>
     <script src="./resources/vendor/jquery-easing/jquery.easing.min.js"></script>
-    <!-- <link rel="icon" type="image/png" sizes="192x192"  href="/resources/img/ms-icon-70x70.png"> -->
+
     <script type="text/javascript" src="./resources/vendor/html2canvas/html2canvas.js"></script>
 
     <script src="./resources/vendor/chart.js/chart.min.js"></script>
@@ -22,7 +21,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>
 
     <script src="./resources/vendor/sqljs/sql.js"></script>
-    <!-- 건물 착공 데이터 import -->
+
     <script src="./resources/js/refer-data.js"></script>
 
     <link rel="stylesheet" type="text/css" href="./resources/vendor/bootstrap/css/bootstrap.min.css"></link>
@@ -44,27 +43,39 @@
         }
 
         #listCon::-webkit-scrollbar {
-                width: 5px; /*스크롤바의 너비*/
+                width: 5px;
             }
 
         #listCon::-webkit-scrollbar-thumb {
-            background-color: rgb(100, 100, 100); /*스크롤바의 색상*/
+            background-color: rgb(100, 100, 100);
         }
 
         #listCon::-webkit-scrollbar-track {
-            background-color: rgb(224, 224, 224); /*스크롤바 트랙 색상*/
+            background-color: rgb(224, 224, 224);
         }
+
+        #dimScreen {
+            width: 100%;
+            height: 100%;
+            background:rgba(255,255,255,0.5);
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 100;
+        }
+
     </style>
 </head>
 <body style="font-family:'Malgun Gothic';">
+    <div id="dimScreen" style="background-color: rgba(0, 0, 0, 0.5);text-align: center;width:100%"><div style="margin-top:400px;text-align:center;"><img style="background-color: rgb(255, 255, 255,0.8);border-radius:10px 10px 10px 10px;" src="./resources/img/loading.gif"></img></div></div>
     <div id="wrap" style="margin: auto;width:80%;">
         <div id="header-wrap">
             <div id="title-left" style="float:left;height:70px;width:60%;margin-bottom:5px;">
-                <img src="./resources/img/fada_logo.png" alt="Fada Assistant">
+                <img src="./resources/img/fada_logo_.png" alt="Fada Assistant">
             </div>
             <div id="header-right" style="float:left;height:50px;width:40%;text-align:right;">
                 <label class="m-0 font-weight-bold">
-                    <a href="#" data-toggle="modal" onclick="showInfo();" data-target="#info-modal">Fada Assistant v1.0.0</a>
+                    <a href="#" data-toggle="modal" onclick="showInfo();" data-target="#info-modal">Fada Assistant v1.0.1</a>
                 </label>
             </div>
         </div>
@@ -104,22 +115,20 @@
             </div>
             <div style="width:24%;display: inline-block;text-align:right">
                 <a id="screenshot" onclick="screenshot();" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" style="height:33px;margin-top:5px;margin-left:10px;display:block;margin-bottom:10px">
-                <i class="fas fa-download fa-sm text-white-50"></i>스크린샷 저장</a>
+                <i class="fas fa-download fa-sm text-white-50"></i>이미지 보기</a>
             </div>
             <div class="tab-content" id="tabContent" style="border:1px solid rgb(211, 211, 211);padding-top:10px;padding-left:10px;padding-right:10px;">
                 <div class="tab-pane fade show active" id="tab1">
 
                     <div class="row" >
 
-                        <!-- Area Chart -->
                         <div style="width:50%;">
                             <div class="card shadow mb-4" style="border-radius:0px;">
-                                <!-- Card Header - Dropdown -->
+
                                 <div
                                         class="card-header d-flex flex-row align-items-center justify-content-between">
-                                    <img src="./resources/img/header1.png"><!-- <h6 class="m-0 font-weight-bold" style="color:#51545c">업체별 합격수량 비율</h6> -->
+                                    <img src="./resources/img/header1.png">
                                 </div>
-                                <!-- Card Body -->
                                 <div class="card-body" style="text-align: center;margin:auto;width:100%">
                                     <div style="width:45%;text-align: left;float:left;height:300px">
                                         <div id="legend-div-chart1"></div>
@@ -131,14 +140,11 @@
                             </div>
                         </div>
 
-                        <!-- Area Chart -->
                         <div style="width:50%;">
                             <div class="card shadow mb-4" style="border-radius:0px;">
-                                <!-- Card Header - Dropdown -->
                                 <div class="card-header d-flex flex-row align-items-center justify-conte\nt-between">
                                         <img src="./resources/img/header2.png">
                                 </div>
-                                <!-- Card Body -->
                                 <div class="card-body" style="text-align: center;margin:auto;width:100%">
                                     <div style="width:30%;text-align: left;float:left;height:300px">
                                         <div id="legend-div-chart2"></div>
@@ -153,17 +159,15 @@
 
                     <div class="row">
 
-                        <!-- Area Chart -->
-                        <!-- Area Chart -->
                         <div style="width:50%;">
                             <div class="card shadow mb-4" style="border-radius:0px;">
-                                <!-- Card Header - Dropdown -->
+
                                 <div
                                         class="card-header d-flex flex-row align-items-center justify-content-between">
                                         <img src="./resources/img/header3.png">
                                     <div class="dropdown no-arrow"></div>
                                 </div>
-                                <!-- Card Body -->
+
                                 <div class="card-body" style="text-align: center;margin:auto;width:100%">
                                     <div style="width:30%;text-align: left;float:left;height:300px">
                                         <div id="legend-div-chart3"></div>
@@ -175,16 +179,13 @@
                             </div>
                         </div>
 
-                        <!-- Area Chart -->
                         <div style="width:50%;">
                             <div class="card shadow mb-4" style="border-radius:0px;">
-                                <!-- Card Header - Dropdown -->
                                 <div
                                         class="card-header d-flex flex-row align-items-center justify-content-between">
                                         <img src="./resources/img/header4.png">
                                     <div class="dropdown no-arrow"></div>
                                 </div>
-                                <!-- Card Body -->
                                 <div class="card-body" style="text-align: center;margin:auto;width:100%">
                                     <div style="width:20%;text-align: left;float:left;height:300px">
                                         <div id="legend-div-chart4"></div>
@@ -199,16 +200,115 @@
 
                 </div>
                 <div class="tab-pane fade" id="tab2">
-                    <div style="margin:auto;"><div id="chart1-detail"></div></div>
+                    <div style="margin:auto;">
+                        <table style="width:100%">
+                            <tr>
+                                <td colspan="2">
+                                    <div id="chart1_condition">
+                                        년도
+                                        <select id="chart1year" name="chart1year" type="text" style="width:100px;height:30px;border:1px solid #babfc7;">
+                                        </select>
+                                        <a id="chart1Search" onclick="chart1Search();" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" style="height:33px;margin-top:5px;margin-left:10px;display:block;margin-bottom:10px">
+                                        <i class="fas fa-download fa-search text-white-50"></i>조회</a>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width:35%" valign="top"><div id="legend-div-chart1-origin"></div></td>
+                                <td style="width:65%">
+                                    <div id="chart1-detail" style="width:100%;position:relative;height:600px">
+                                        <canvas id="chart1Origin"></canvas>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
                 </div>
                 <div class="tab-pane fade" id="tab3">
-                    <div style="margin:auto;"><div id="chart2-detail"></div></div>
+                    <div style="margin:auto;">
+                        <table style="width:100%">
+                            <tr>
+                                <td colspan="2">
+                                    <div id="chart2_condition">
+                                        기간(년월)
+                                        <select id="chart2StartYearMonth" name="chart2StartYearMonth" type="text" style="width:100px;height:30px;border:1px solid #babfc7;">
+                                        </select>
+                                        ~
+                                        <select id="chart2EndYearMonth" name="chart2EndYearMonth" type="text" style="width:100px;height:30px;border:1px solid #babfc7;">
+                                        </select>
+                                        <a id="chart2Search" onclick="chart2Search();" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" style="height:33px;margin-top:5px;margin-left:10px;display:block;margin-bottom:10px">
+                                        <i class="fas fa-download fa-search text-white-50"></i>조회</a>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width:20%;" valign="top">
+                                    <div id="legend-div-chart2-origin" ></div>
+                                </td>
+                                <td style="width:80%">
+                                    <div id="chart2-detail" style="width:100%;position:relative;height:600px">
+                                        <canvas id="chart2Origin"></canvas>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
                 </div>
                 <div class="tab-pane fade" id="tab4">
-                    <div style="margin:auto;"><div id="chart3-detail"></div></div>
+                    <div style="margin:auto;">
+                        <table style="width:100%">
+                            <tr>
+                                <td colspan="2">
+                                    <div id="chart3_condition">
+                                        기간(년도)
+                                        <select id="chart3StartYear" name="chart3StartYear" type="text" style="width:100px;height:30px;border:1px solid #babfc7;">
+                                        </select>
+                                        ~
+                                        <select id="chart3EndYear" name="chart3EndYear" type="text" style="width:100px;height:30px;border:1px solid #babfc7;">
+                                        </select>
+                                        <a id="chart3Search" onclick="chart3Search();" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" style="height:33px;margin-top:5px;margin-left:10px;display:block;margin-bottom:10px">
+                                        <i class="fas fa-download fa-search text-white-50"></i>조회</a>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width:20%" valign="top"><div id="legend-div-chart3-origin"></div></td>
+                                <td style="width:80%">
+                                    <div id="chart3-detail" style="width:100%;position:relative;height:600px">
+                                        <canvas id="chart3Origin"></canvas>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
                 </div>
                 <div class="tab-pane fade" id="tab5">
-                    <div style="margin:auto;"><div id="chart4-detail"></div></div>
+                    <div style="margin:auto;">
+                        <table style="width:100%">
+                            <tr>
+                                <td colspan="2">
+                                    <div id="chart4_condition">
+                                        기간(년도)
+                                        <select id="chart4StartYear" name="chart4StartYear" type="text" style="width:100px;height:30px;border:1px solid #babfc7;">
+                                        </select>
+                                        ~
+                                        <select id="chart4EndYear" name="chart4EndYear" type="text" style="width:100px;height:30px;border:1px solid #babfc7;">
+                                        </select>
+                                        <a id="chart4Search" onclick="chart4Search();" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" style="height:33px;margin-top:5px;margin-left:10px;display:block;margin-bottom:10px">
+                                        <i class="fas fa-download fa-search text-white-50"></i>조회</a>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width:20%" valign="top"><div id="legend-div-chart4-origin"></div></td>
+                                <td style="width:80%">
+                                    <div id="chart4-detail" style="width:100%;position:relative;height:600px">
+                                        <canvas id="chart4Origin"></canvas>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
@@ -223,9 +323,9 @@
                 <div class="modal-body">
                     <span style="font-weight: bold;"><h5>Fada Assistant</h5></span>
 
-                    <span>Description : Assistant for fire apparatus data analysis</span><br>
-                    <span>Version : 1.0.0</span><br>
-                    <span>Release : 2022. 09</span>
+                    <span>Description : Assistant Tool for fire apparatus data analysis</span><br>
+                    <span>Version : 1.0.1</span><br>
+                    <span>Release : 2022. 10</span>
                 </div>
                 <div class="modal-footer">
                     <button type="button" onclick="hideInfo()" class="btn btn-primary" data-dismiss="modal">닫기</button>
@@ -233,8 +333,26 @@
             </div>
         </div>
     </div>
+
+    <div class="modal fade" style="--bs-modal-width:1530px" id="viewer-modal" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h6 class="modal-title m-0">이미지 보기</h6><img src="resources/img/download_description.png"></img>
+                </div>
+                <div class="modal-body">
+                    <div id="image-container"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" onclick="hideViewer()" class="btn btn-primary" data-dismiss="modal">닫기</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 <script>
+    
+    var selectedTab = "전체";
 
     var db = new SQL.Database();
 
@@ -248,18 +366,27 @@
 
     $(document).ready(function(){
     
+
+        $("#viewer-modal").modal({
+            backdrop:'static',
+            keyboard:false
+        })
+
+        $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+            selectedTab = $(e.target).text();
+        });
+
         db.run("CREATE TABLE _EXCEL1_ORIGIN_DATA (X1_ID, X1_DATE, X1_YEAR, X1_YEAR_MONTH, X1_COMPANY, X1_AMOUNT);");
         db.run("CREATE TABLE _YEAR_MONTH_PROCESSING_DATA (T1_ID, T1_COMPANY, T1_YEAR_MONTH, T1_AMOUNT);");
 
-        $("#fileInput").on('change', function(){  // 값이 변경되면
-            if(window.FileReader){  // modern browser
+        $("#fileInput").on('change', function(){
+            if(window.FileReader){
                 var filename = $(this)[0].files[0].name;
                 $("#userfile").val($(this)[0].files[0].path);
-            } else {  // old IE
-                var filename = $(this).val().split('/').pop().split('\\').pop();  // 파일명만 추출
+            } else {
+                var filename = $(this).val().split('/').pop().split('\\').pop();
             }
 
-            // 추출한 파일명 삽입
             $("#userfile").val(filename);
         });
 
@@ -268,44 +395,43 @@
                 $(this).tab('show')
         });
 
-
+        $('#dimScreen').hide();
     });
 
     function screenshot(){
 
-        let scrollHeight = Math.max(
-                document.body.scrollHeight, document.documentElement.scrollHeight,
-                document.body.offsetHeight, document.documentElement.offsetHeight,
-                document.body.clientHeight, document.documentElement.clientHeight
-            );
+        $("#image-container").empty();
 
-            alert( window.innerWidth);
-            html2canvas($("#tab1")[0]).then((canvas) => {
-                canvas.width = window.innerWidth;
-                canvas.height = window.innerHeight;
-                document.body.appendChild(canvas);
-            });
+        var tabname = selectedTab;
+
+        if(selectedTab == "전체"){
+            tabname = "tab1";
+        }else if(selectedTab == "업체별 합격 수량 비율"){
+            tabname = "tab2";
+        }else if(selectedTab == "기간별/업체별 합격 수량"){
+            tabname = "tab3";
+        }else if(selectedTab == "기간별/업체별 품목 증가 추이"){
+            tabname = "tab4";
+        }else if(selectedTab == "기간별 합격 수량 증감 추이/건물 착공 데이터 비교"){
+            tabname = "tab5";
+        }
+
+        $("#chart1_condition").hide();
+        $("#chart2_condition").hide();
+        $("#chart3_condition").hide();
+        $("#chart4_condition").hide();
+
+        html2canvas($("#"+tabname)[0],{scrollX:-210,scrollY:-220}).then((canvas) => {
+            document.getElementById('image-container').appendChild(canvas);
+        });
+
+        showViewer();
+        $("#chart1_condition").show();
+        $("#chart2_condition").show();
+        $("#chart3_condition").show();
+        $("#chart4_condition").show();
 
     }
-
-    function print(){
-        var mywindow = window.open('', 'PRINT', 'height=400,width=600');
-
-        mywindow.document.write('<html><head><title>' + document.title  + '</title>');
-        mywindow.document.write('</head><body >');
-        mywindow.document.write('<h1>' + document.title  + '</h1>');
-        mywindow.document.write(document.getElementById('tab1').innerHTML);
-        mywindow.document.write('</body></html>');
-
-        mywindow.document.close(); // necessary for IE >= 10
-        mywindow.focus(); // necessary for IE >= 10*/
-
-        mywindow.print();
-        mywindow.close();
-
-        return true;
-    }
-
 
     function showInfo(){
         $("#info-modal").modal('show');
@@ -315,8 +441,27 @@
          $("#info-modal").modal("hide");
 
     }
+
+    function showViewer(){
+        $("#viewer-modal").modal('show');
+    }
+
+    function hideViewer(){
+         $("#viewer-modal").modal("hide");
+
+    }
     
     function upload(event){
+        $('#dimScreen').show();
+        
+        setTimeout(function() {
+            excuteExcelEngine(event);
+        }, 500);
+
+    }
+
+    function excuteExcelEngine(event){
+        
         var input = event.target;
         var reader = new FileReader();
         reader.onload = function(){
@@ -332,6 +477,15 @@
 
     function setOriginData(originData){
         let parsedOriginData = JSON.parse(originData);
+
+        if(parsedOriginData[0].일자 === undefined || parsedOriginData[0].업체명 === undefined || parsedOriginData[0].수량 === undefined){
+            alert("적합한 엑셀파일이 아닌 것 같습니다.\n일자, 업체명, 수량이 등록된 엑셀 파일을 등록해주세요.");
+            $('#dimScreen').hide();
+            return;
+        }
+
+        db.run("DELETE FROM _EXCEL1_ORIGIN_DATA;");
+        db.run("DELETE FROM _YEAR_MONTH_PROCESSING_DATA;");
 
         for(var i=0; i<parsedOriginData.length; i++){
             var date = parsedOriginData[i].일자;
@@ -350,6 +504,7 @@
         analysisData2();
         analysisData3();
         analysisData4();
+        $('#dimScreen').hide();
     }
 
     function analysisData1(){
@@ -359,6 +514,11 @@
         var maxYear = parsedData1.max_year;
         var minYear = parsedData1.min_year;
         
+        for(var i=maxYear; i>=minYear; i--){
+            var option = $("<option value='"+i+"'>"+i+"</option>");
+            $('#chart1year').append(option);
+        }
+
         var stmt2 = db.prepare("SELECT X1_COMPANY, SUM(X1_AMOUNT) AS X1_AMOUNT FROM _EXCEL1_ORIGIN_DATA WHERE X1_YEAR = '" +maxYear+ "' GROUP BY X1_COMPANY ORDER BY X1_AMOUNT DESC");
         
         var companyMap = new Map();
@@ -381,27 +541,62 @@
             chart1Labels.push(key+"("+fixData+"%)");
             chart1Datas.push(value);
         }
-        //alert(chart1Datas.join(","));
+
         chart1.data.labels = chart1Labels;
         chart1.data.datasets[0].data = chart1Datas;
         chart1.data.datasets[0].backgroundColor = bgcolorList;
-        
-        //chart1.data.labels = ["아","로","하"];
-        //chart1.data.datasets[0].data = [20,30,50];
-
         chart1.update();
-        //alert(_BUILDING_AREA_DATA.get("2021"));
-        //alert(JSON.stringify(data));
+
+        chart1Search(maxYear);
+    }
+
+    function chart1Search(year){
+        if(year=="" || year === undefined){
+            year = $("#chart1year").val();
+        }
+        
+        var stmt2 = db.prepare("SELECT X1_COMPANY, SUM(X1_AMOUNT) AS X1_AMOUNT FROM _EXCEL1_ORIGIN_DATA WHERE X1_YEAR = '" +year+ "' GROUP BY X1_COMPANY ORDER BY X1_AMOUNT DESC");
+        
+        var companyMap = new Map();
+        var sumAmount = 0;
+
+        while(stmt2.step()){
+            var data2 = stmt2.getAsObject();
+            var parsedData2 = JSON.parse(JSON.stringify(data2));
+            var company = parsedData2.X1_COMPANY;
+            var amount =  parsedData2.X1_AMOUNT;
+            sumAmount += parseInt(amount);
+            companyMap.set(company, amount);
+        }
+        
+        var chart1Labels = [];
+        var chart1Datas = [];
+        for(const key of companyMap.keys()){
+            let value = companyMap.get(key);
+            var fixData = parseFloat(parseFloat(value/sumAmount*100).toFixed(2));
+            chart1Labels.push(key+"("+fixData+"%)");
+            chart1Datas.push(value);
+        }
+
+        chart1Origin.data.labels = chart1Labels;
+        chart1Origin.data.datasets[0].data = chart1Datas;
+        chart1Origin.data.datasets[0].backgroundColor = bgcolorList;
+        chart1Origin.update();
     }
 
     function analysisData2(){
-        var stmt1 = db.prepare("SELECT MAX(X1_YEAR) AS max_year ,MIN(X1_YEAR) AS min_year FROM _EXCEL1_ORIGIN_DATA");
-        var data1 = stmt1.getAsObject(0);
-        var parsedData1 = JSON.parse(JSON.stringify(data1));
-        var maxYear = parsedData1.max_year;
-        var minYear = parsedData1.min_year;
+        var stmt1 = db.prepare("SELECT DISTINCT X1_YEAR_MONTH AS year_month_ FROM _EXCEL1_ORIGIN_DATA ORDER BY year_month_ DESC");
 
-        
+        while(stmt1.step()){
+            var data1 = stmt1.getAsObject();
+            var parsedData1 = JSON.parse(JSON.stringify(data1));
+            var yearMonth_ = parsedData1.year_month_;
+            var option1 = $("<option value='"+yearMonth_+"'>"+yearMonth_+"</option>");
+            var option2 = $("<option value='"+yearMonth_+"'>"+yearMonth_+"</option>");
+            $('#chart2StartYearMonth').append(option1);
+            $('#chart2EndYearMonth').append(option2);
+        }
+
         var stmt2 = db.prepare("SELECT DISTINCT X1_YEAR_MONTH FROM _EXCEL1_ORIGIN_DATA ORDER BY X1_YEAR_MONTH DESC LIMIT 12");
         var stmt3 = db.prepare("SELECT DISTINCT X1_COMPANY FROM _EXCEL1_ORIGIN_DATA");
 
@@ -416,6 +611,10 @@
             yearMonthList.push(yearMonth);
         }
         yearMonthList.sort();
+
+        $("#chart2StartYearMonth").val(yearMonthList[0]).prop("selected", true);
+        $("#chart2EndYearMonth").val(yearMonthList[yearMonthList.length-1]).prop("selected", true);
+        chart2Search(yearMonthList[0], yearMonthList[yearMonthList.length-1]);
 
         var companyList = [];
         while(stmt3.step()){
@@ -449,16 +648,84 @@
         chart2.data.labels = yearMonthList;
         chart2.data.datasets = datasets;
         chart2.update();
-        //chart2.resize();
+    }
+
+    function chart2Search(startYearMonth, endYearMonth){
+        if(startYearMonth=="" || startYearMonth === undefined || endYearMonth=="" || endYearMonth === undefined){
+            startYearMonth = $("#chart2StartYearMonth").val();
+            endYearMonth = $("#chart2EndYearMonth").val();
+        }
+
+        var stmt2 = db.prepare("SELECT DISTINCT X1_YEAR_MONTH FROM _EXCEL1_ORIGIN_DATA WHERE X1_YEAR_MONTH >= '"+startYearMonth+"' AND X1_YEAR_MONTH <= '"+endYearMonth+"' ORDER BY X1_YEAR_MONTH DESC");
+        var stmt3 = db.prepare("SELECT DISTINCT X1_COMPANY FROM _EXCEL1_ORIGIN_DATA");
+
+        var i =0;
+        
+        var yearMonthList = [];
+        while(stmt2.step()){
+            var data2 = stmt2.getAsObject();
+            var parsedData2 = JSON.parse(JSON.stringify(data2));
+            var yearMonth = parsedData2.X1_YEAR_MONTH;
+
+            yearMonthList.push(yearMonth);
+        }
+        
+        if(yearMonthList.length >= 24){
+            alert("최대 24개월까지 조회 가능합니다.");
+            return;
+        }
+        yearMonthList.sort();
+
+        var companyList = [];
+        while(stmt3.step()){
+            var data3 = stmt3.getAsObject();
+            var parsedData3 = JSON.parse(JSON.stringify(data3));
+            var company = parsedData3.X1_COMPANY;
+
+            companyList.push(company);
+        }
+
+        var datasets = [];
+        for(var j=0; j < companyList.length; j++){
+            var amountList = [];
+            for(var k=0; k<yearMonthList.length; k++){
+                var stmt4 = db.prepare("SELECT IFNULL(SUM(X1_AMOUNT),0) AS amount FROM _EXCEL1_ORIGIN_DATA WHERE X1_YEAR_MONTH = '"+yearMonthList[k]+"' AND X1_COMPANY = '"+companyList[j]+"'");
+                var data4 = stmt4.getAsObject(0);
+                var parsedData4 = JSON.parse(JSON.stringify(data4));
+                var amount = parsedData4.amount;
+                amountList.push(amount);
+            }
+            var dataset = {
+                label : companyList[j],
+                data : amountList,
+                borderColor : bgcolorList[j],
+                backgroundColor : bgcolorList[j],
+                tension: 0.1
+            }
+            datasets.push(dataset);
+        }
+        
+        chart2Origin.data.labels = yearMonthList;
+        chart2Origin.data.datasets = datasets;
+        chart2Origin.update();
     }
 
     function analysisData3(){
-        var stmt1 = db.prepare("SELECT MAX(X1_YEAR) AS max_year ,MIN(X1_YEAR) AS min_year FROM _EXCEL1_ORIGIN_DATA");
-        var data1 = stmt1.getAsObject(0);
-        var parsedData1 = JSON.parse(JSON.stringify(data1));
-        var maxYear = parsedData1.max_year;
-        var minYear = parsedData1.min_year;
+        var stmt1 = db.prepare("SELECT DISTINCT X1_YEAR FROM _EXCEL1_ORIGIN_DATA  ORDER BY X1_YEAR DESC");
+        var yearMonthList = [];
 
+        while(stmt1.step()){
+            var data1 = stmt1.getAsObject();
+            var parsedData1 = JSON.parse(JSON.stringify(data1));
+            var year_ = parsedData1.X1_YEAR;
+
+            yearMonthList.push(year_);
+            var option1 = $("<option value='"+year_+"'>"+year_+"</option>");
+            var option2 = $("<option value='"+year_+"'>"+year_+"</option>");
+            $('#chart3StartYear').append(option1);
+            $('#chart3EndYear').append(option2);
+        }
+        
         var stmt2 = db.prepare("SELECT DISTINCT X1_YEAR FROM _EXCEL1_ORIGIN_DATA ORDER BY X1_YEAR DESC LIMIT 10");
         var stmt3 = db.prepare("SELECT DISTINCT X1_COMPANY FROM _EXCEL1_ORIGIN_DATA");
 
@@ -473,6 +740,10 @@
             yearList.push(year);
         }
         yearList.sort();
+
+        $("#chart3StartYear").val(yearList[0]).prop("selected", true);
+        $("#chart3EndYear").val(yearList[yearList.length-1]).prop("selected", true);
+        chart3Search(yearList);
 
         var companyList = [];
         while(stmt3.step()){
@@ -506,20 +777,84 @@
         chart3.update();
     }
 
+    function chart3Search(yearList){
+        
+        if(yearList === undefined || yearList == null){
+            startYear = $("#chart3StartYear").val();
+            endYear = $("#chart3EndYear").val();
+
+            yearList = [];
+
+            var stmt1 = db.prepare("SELECT DISTINCT X1_YEAR FROM _EXCEL1_ORIGIN_DATA WHERE X1_YEAR >= '"+startYear+"' AND X1_YEAR <= '"+endYear+"' ORDER BY X1_YEAR DESC");
+
+            while(stmt1.step()){
+                var data1 = stmt1.getAsObject();
+                var parsedData1 = JSON.parse(JSON.stringify(data1));
+                var year_ = parsedData1.X1_YEAR;
+                yearList.push(year_);
+            }
+            yearList.sort();
+        }
+
+        var stmt3 = db.prepare("SELECT DISTINCT X1_COMPANY FROM _EXCEL1_ORIGIN_DATA");
+
+        var companyList = [];
+
+        while(stmt3.step()){
+            var data3 = stmt3.getAsObject();
+            var parsedData3 = JSON.parse(JSON.stringify(data3));
+            var company = parsedData3.X1_COMPANY;
+
+            companyList.push(company);
+        }
+
+        var datasets = [];
+        for(var j=0; j < companyList.length; j++){
+            var amountList = [];
+            for(var k=0; k<yearList.length; k++){
+                var stmt4 = db.prepare("SELECT IFNULL(SUM(X1_AMOUNT),0) AS amount FROM _EXCEL1_ORIGIN_DATA WHERE X1_YEAR = '"+yearList[k]+"' AND X1_COMPANY = '"+companyList[j]+"'");
+                var data4 = stmt4.getAsObject(0);
+                var parsedData4 = JSON.parse(JSON.stringify(data4));
+                var amount = parsedData4.amount;
+                amountList.push(amount);
+            }
+            var dataset = {
+                label : companyList[j],
+                data : amountList,
+                backgroundColor : bgcolorList[j],
+            }
+            datasets.push(dataset);
+        }
+        
+        chart3Origin.data.labels = yearList;
+        chart3Origin.data.datasets = datasets;
+        chart3Origin.update();
+    }
 
     function analysisData4(){
-        var stmt1 = db.prepare("SELECT MAX(X1_YEAR) AS max_year ,MIN(X1_YEAR) AS min_year FROM _EXCEL1_ORIGIN_DATA");
-        var data1 = stmt1.getAsObject(0);
-        var parsedData1 = JSON.parse(JSON.stringify(data1));
-        var maxYear = parsedData1.max_year;
-        var minYear = parsedData1.min_year;
+
+        var stmt1 = db.prepare("SELECT DISTINCT X1_YEAR FROM _EXCEL1_ORIGIN_DATA  ORDER BY X1_YEAR DESC");
+        var yearMonthList = [];
+
+        while(stmt1.step()){
+            var data1 = stmt1.getAsObject();
+            var parsedData1 = JSON.parse(JSON.stringify(data1));
+            var year_ = parsedData1.X1_YEAR;
+
+            yearMonthList.push(year_);
+            var option1 = $("<option value='"+year_+"'>"+year_+"</option>");
+            var option2 = $("<option value='"+year_+"'>"+year_+"</option>");
+            $('#chart4StartYear').append(option1);
+            $('#chart4EndYear').append(option2);
+        }
+
 
         var stmt2 = db.prepare("SELECT X1_YEAR, IFNULL(SUM(X1_AMOUNT),0) AS X1_AMOUNT FROM _EXCEL1_ORIGIN_DATA GROUP BY X1_YEAR ORDER BY X1_YEAR DESC LIMIT 10");
 
         var dataMap = new Map();
         
         var yearList = [];
-        while(stmt2.step()){
+        while(stmt2.step()){ 
             var data2 = stmt2.getAsObject();
             var parsedData2 = JSON.parse(JSON.stringify(data2));
             var _year = parsedData2.X1_YEAR;
@@ -529,12 +864,17 @@
         }
         yearList.sort();
         
+        
+        $("#chart4StartYear").val(yearList[0]).prop("selected", true);
+        $("#chart4EndYear").val(yearList[yearList.length-1]).prop("selected", true);
+        var startYear_ = yearList[0];
+        var endYear_ = yearList[yearList.length-1];
+        
         var prevYear = yearList[0]-1;
         var stmt3 = db.prepare("SELECT IFNULL(SUM(X1_AMOUNT),0) AS X1_PREV_AMOUNT FROM _EXCEL1_ORIGIN_DATA WHERE X1_YEAR = '"+prevYear+"'");
         var data3 = stmt3.getAsObject(0);
         var parsedData3 = JSON.parse(JSON.stringify(data3));
         var prevAmount = parsedData3.X1_PREV_AMOUNT;
-
 
         var amountList = [];
         var buildingAreaList = [];
@@ -556,9 +896,6 @@
                 compareRateList.push(rate.toFixed(2));
             }
         }
-
-
-
 
         var datasets = [];
         var dataset1 = {
@@ -594,6 +931,104 @@
         chart4.data.labels = yearList;
         chart4.data.datasets = datasets;
         chart4.update();
+        setTimeout(function() {
+            chart4Search(startYear_, endYear_);
+        }, 500);
+
+    }
+
+    function chart4Search(startYear, endYear){
+        
+        if(startYear === undefined || startYear == null || endYear === undefined || endYear == null){
+            startYear = $("#chart4StartYear").val();
+            endYear = $("#chart4EndYear").val();
+        }
+
+        var stmt2 = db.prepare("SELECT X1_YEAR, IFNULL(SUM(X1_AMOUNT),0) AS X1_AMOUNT FROM _EXCEL1_ORIGIN_DATA WHERE X1_YEAR >= '"+startYear+"' AND X1_YEAR <= '"+endYear+"' GROUP BY X1_YEAR ORDER BY X1_YEAR DESC");
+
+        var dataMap = new Map();
+
+        var yearList = [];
+        while(stmt2.step()){ 
+            var data2 = stmt2.getAsObject();
+            var parsedData2 = JSON.parse(JSON.stringify(data2));
+            var _year = parsedData2.X1_YEAR;
+            var _amount = parsedData2.X1_AMOUNT;
+            yearList.push(_year);
+            dataMap.set(_year,_amount);
+        }
+        yearList.sort();
+
+        var prevYear = yearList[0]-1;
+        var stmt3 = db.prepare("SELECT IFNULL(SUM(X1_AMOUNT),0) AS X1_PREV_AMOUNT FROM _EXCEL1_ORIGIN_DATA WHERE X1_YEAR = '"+prevYear+"'");
+        var data3 = stmt3.getAsObject(0);
+        var parsedData3 = JSON.parse(JSON.stringify(data3));
+        var prevAmount = parsedData3.X1_PREV_AMOUNT;
+
+        var amountList = [];
+        var buildingAreaList = [];
+        var compareRateList = [];
+        for(var key of yearList){
+            amountList.push(dataMap.get(key));
+            if(_BUILDING_AREA_DATA.has(key)){
+                buildingAreaList.push(_BUILDING_AREA_DATA.get(key));
+            }else{
+                buildingAreaList.push(0);
+            }
+
+            var rate = 0;
+            if(key-1 == prevYear){
+                rate = ((dataMap.get(key)-prevAmount)/dataMap.get(key))*100;
+                compareRateList.push(rate.toFixed(2));
+            }else{
+                rate = ((dataMap.get(key)-dataMap.get((key-1)+""))/dataMap.get(key))*100;
+                compareRateList.push(rate.toFixed(2));
+            }
+        }
+
+        var datasets = [];
+
+        var dataset1 = {
+            type: 'bar',
+            label: '합계(개)',
+            data: amountList,
+            yAxisID: 'A',
+            backgroundColor : 'rgb(54, 162, 235)',
+            borderColor : 'rgb(54, 162, 235)',
+            tension: 0.1
+        }
+        var dataset2 = {
+            type: 'line',
+            label: '전년대비(%)',
+            data: compareRateList,
+            yAxisID: 'B',
+            backgroundColor : 'rgb(255, 99, 132)',
+            borderColor : 'rgb(255, 99, 132)',
+            tension: 0.1
+        }
+        var dataset3 = {
+            type: 'line',
+            label: '착공면적(천㎡)',
+            data: buildingAreaList,
+            backgroundColor : 'rgb(255, 205, 86)',
+            borderColor : 'rgb(255, 205, 86)',
+            tension: 0.1
+        }
+
+        datasets.push(dataset1);
+        chart4Origin.data.datasets = datasets;
+        chart4Origin.update();
+
+        datasets.push(dataset2);
+        chart4Origin.data.datasets = datasets;
+        chart4Origin.update();
+
+        datasets.push(dataset3);
+        chart4Origin.data.datasets = datasets;
+        chart4Origin.update();
+
+        chart4Origin.data.labels = yearList;
+        chart4Origin.update();
     }
 </script>
 <script>
@@ -601,15 +1036,18 @@
     Chart.register(ChartDataLabels);
     
     const getOrCreateLegendList = (chart, id) => {
+        var widthPix = '300px';
+        if(id == "legend-div-chart1-origin" || id == "legend-div-chart2-origin" || id == "legend-div-chart3-origin" || id == "legend-div-chart4-origin"){
+            widthPix = '600px';
+        }
         const legendContainer = document.getElementById(id);
         let listContainer = legendContainer.querySelector('ul');
 
         if (!listContainer) {
             listContainer = document.createElement('ul');
-            //listContainer.style.display = 'flex';
             listContainer.id = "listCon"
             listContainer.style.paddingLeft= '0px';
-            listContainer.style.height = '300px';
+            listContainer.style.height = widthPix;
             listContainer.style.overflow = 'auto';
             listContainer.style.fontSize = '12px';
             listContainer.style.flexDirection = 'row';
@@ -627,12 +1065,10 @@
         afterUpdate(chart, args, options) {
             const ul = getOrCreateLegendList(chart, options.containerID);
 
-            // Remove old legend items
             while (ul.firstChild) {
                 ul.firstChild.remove();
             }
 
-            // Reuse the built-in legendItems generator
             const items = chart.options.plugins.legend.labels.generateLabels(chart);
 
             items.forEach(item => {
@@ -646,7 +1082,6 @@
                 li.onclick = () => {
                 const {type} = chart.config;
                 if (type === 'pie' || type === 'doughnut') {
-                    // Pie and doughnut charts only have a single dataset and visibility is per item
                     chart.toggleDataVisibility(item.index);
                 } else {
                     chart.setDatasetVisibility(item.datasetIndex, !chart.isDatasetVisible(item.datasetIndex));
@@ -654,7 +1089,6 @@
                 chart.update();
                 };
 
-                // Color box
                 const boxSpan = document.createElement('span');
                 boxSpan.style.background = item.fillStyle;
                 boxSpan.style.borderColor = item.strokeStyle;
@@ -665,7 +1099,6 @@
                 boxSpan.style.marginBottom = '2px';
                 boxSpan.style.width = '17px';
 
-                // Text
                 const textContainer = document.createElement('p');
                 textContainer.style.color = item.fontColor;
                 textContainer.style.margin = 0;
@@ -767,15 +1200,100 @@
         plugins: [htmlLegendPlugin]
     });
 
+    var chart1Origin = new Chart(document.getElementById("chart1Origin"), {
+        type: 'pie',
+        data: {
+            labels: [
+                ''
+            ],
+            datasets: [{
+                label: '',
+                data: [100],
+                backgroundColor: [
+                'rgb(255, 99, 132)',
+                'rgb(54, 162, 235)',
+                'rgb(255, 205, 86)'
+                ],
+                hoverOffset: 4
+            }]
+            },
+        options: {
+            layout: {
+                padding: {
+                    top: 30,
+                    bottom:30,
+                    left:30,
+                    right:30
+                }
+            },
+            title: {
+                display: false
+            },
+            plugins: {
+                legend: {
+                    display: false
+                },
+                htmlLegend: {
+                    containerID: 'legend-div-chart1-origin',
+                },
+                datalabels: {
+                    anchor:'end',
+                    align:'end',
+                    backgroundColor: function (context) {
+                        return context.dataset.backgroundColor;
+                    },
+                    borderColor: 'white',
+                    borderRadius: 3,
+                    borderWidth: 0,
+                    color: function (context) {
+                        return context.hovered ? 'black' : 'black'
+                    },
+                    font: {
+                        weight: 'bold'
+                    },
+                    listeners: {
+                        enter: function (context) {
+                            context.hovered = true;
+                            return true;
+                        },
+                        leave: function (context) {
+                            context.hovered = false;
+                            return true;
+                        }
+                    },
+                    display: true,
+                    formatter: function (value, ctx) {
+                        let datasets = ctx.chart.data.datasets[0].data;
+                        if(value !=0){
+                            let sum =0;
+                            dataArr = ctx.chart.data.datasets[0].data;
+                            dataArr.map(data => {
+                                sum += parseInt(data);
+                            });
+                            let percentage = parseFloat(parseFloat(value*100/sum).toFixed(2))+"%";
+                            return percentage;
+                        }else{
+                            let percentage = "";
+                            return percentage;
+                        }
+                    }.bind(this)
+                },
+            },
+            responsive: true,
+            maintainAspectRatio: false
+        },
+        plugins: [htmlLegendPlugin]
+    });
+
     var chart2 = new Chart(document.getElementById("chart2"), {
         type: 'line',
         data: {
             labels: [
-                '레이블'
+                ''
             ],
             datasets: [{
-                label: 'My First Dataset',
-                data: [65, 59, 80, 81, 56, 55, 40],
+                label: '',
+                data: [0, 0, 0, 0, 0, 0, 0],
                 fill: false,
                 borderColor: 'rgb(75, 192, 192)',
                 tension: 0.1
@@ -807,61 +1325,96 @@
         plugins: [htmlLegendPlugin]
     });
 
+    
+    var chart2Origin = new Chart(document.getElementById("chart2Origin"), {
+        type: 'line',
+        data: {
+            labels: [
+                ''
+            ],
+            datasets: [{
+                label: '',
+                data: [0, 0, 0, 0, 0, 0, 0],
+                fill: false,
+                borderColor: 'rgb(75, 192, 192)',
+                tension: 0.1
+            }]
+        },
+        options: {
+            scales: {
+                    y: {
+                        ticks: {
+                          callback: function(val, index) {
+                              return val;
+                          },
+                        }
+                    }
+                },
+            layout: {
+            padding: {
+                top: 30,
+                bottom:30,
+                left:30,
+                right:30
+                }
+            },
+            plugins: {
+                datalabels: {
+                    display: false
+                },
+                legend: {
+                    display: false,
+                },
+                htmlLegend: {
+                    containerID: 'legend-div-chart2-origin',
+                }
+            },
+            responsive: true,
+            maintainAspectRatio: false
+        },
+        plugins: [htmlLegendPlugin]
+    });
+
     var chart3 = new Chart(document.getElementById("chart3"), {
         type: 'bar',
         data: {
             labels: [
-                '레이블1','레이블2','레이블3','레이블4','레이블5','레이블6'
+                '','','','','','','','','',''
             ],
             datasets: [{
-                label: 'My First Dataset',
-                data: [65, 59, 80, 81, 56, 55, 40],
+                label: '',
+                data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
                 backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(255, 159, 64, 0.2)',
-                    'rgba(255, 205, 86, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(153, 102, 255, 0.2)',
-                    'rgba(201, 203, 207, 0.2)'
+                    'rgba(255, 99, 132, 0.2)'
                 ],
                 borderColor: [
-                    'rgb(255, 99, 132)',
-                    'rgb(255, 159, 64)',
-                    'rgb(255, 205, 86)',
-                    'rgb(75, 192, 192)',
-                    'rgb(54, 162, 235)',
-                    'rgb(153, 102, 255)',
-                    'rgb(201, 203, 207)'
+                    'rgb(255, 99, 132)'
                 ],
                 borderWidth: 1
             },
             {
-                label: 'My First Dataset2',
-                data: [34, 29, 50, 31, 26, 15, 50],
+                label: '',
+                data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
                 backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(255, 159, 64, 0.2)',
-                    'rgba(255, 205, 86, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(153, 102, 255, 0.2)',
-                    'rgba(201, 203, 207, 0.2)'
+                    'rgba(255, 99, 132, 0.2)'
                 ],
                 borderColor: [
-                    'rgb(255, 99, 132)',
-                    'rgb(255, 159, 64)',
-                    'rgb(255, 205, 86)',
-                    'rgb(75, 192, 192)',
-                    'rgb(54, 162, 235)',
-                    'rgb(153, 102, 255)',
-                    'rgb(201, 203, 207)'
+                    'rgb(255, 99, 132)'
                 ],
                 borderWidth: 1
             }
         ]
         },
         options: {
+            scales: {
+                    y: {
+                        ticks: {
+                          callback: function(val, index) {
+                              return val;
+                          },
+                        }
+                    }
+                },
             layout: {
             padding: {
                 top: 30,
@@ -888,19 +1441,108 @@
         plugins: [htmlLegendPlugin]
     });
 
+    var chart3Origin = new Chart(document.getElementById("chart3Origin"), {
+        type: 'bar',
+        data: {
+            labels: [
+            '','','','','','','','','',''
+            ],
+            datasets: [{
+                label: '',
+                data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(255, 159, 64, 0.2)',
+                    'rgba(255, 205, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(201, 203, 207, 0.2)'
+                ],
+                borderColor: [
+                    'rgb(255, 99, 132)',
+                    'rgb(255, 159, 64)',
+                    'rgb(255, 205, 86)',
+                    'rgb(75, 192, 192)',
+                    'rgb(54, 162, 235)',
+                    'rgb(153, 102, 255)',
+                    'rgb(201, 203, 207)'
+                ],
+                borderWidth: 1
+            },
+            {
+                label: '',
+                data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(255, 159, 64, 0.2)',
+                    'rgba(255, 205, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(201, 203, 207, 0.2)'
+                ],
+                borderColor: [
+                    'rgb(255, 99, 132)',
+                    'rgb(255, 159, 64)',
+                    'rgb(255, 205, 86)',
+                    'rgb(75, 192, 192)',
+                    'rgb(54, 162, 235)',
+                    'rgb(153, 102, 255)',
+                    'rgb(201, 203, 207)'
+                ],
+                borderWidth: 1
+            }
+        ]
+        },
+        options: {
+            scales: {
+                    y: {
+                        ticks: {
+                          callback: function(val, index) {
+                              return val;
+                          },
+                        }
+                    }
+                },
+            layout: {
+            padding: {
+                top: 30,
+                bottom:30,
+                left:30,
+                right:30
+                }
+            },
+            plugins: {
+                datalabels: {
+                    display: false
+                },
+                legend: {
+                    display: false,
+                },
+                htmlLegend: {
+                    containerID: 'legend-div-chart3-origin',
+                }
+            },
+            responsive: true,
+            maintainAspectRatio: false,
+            barThickness: 3
+        },
+        plugins: [htmlLegendPlugin]
+    });
 
     var chart4 = new Chart(document.getElementById("chart4"), {
         type: 'line',
         data: {
-            labels: ['January', 'February', 'March', 'April'],
+            labels: ['', '', '', '', '', '', '', '', '', ''],
             datasets: [{
                 type: 'bar',
-                label: 'Bar Dataset',
-                data: [10, 20, 30, 40]
+                label: '',
+                data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
             }, {
                 type: 'line',
-                label: 'Line Dataset',
-                data: [50, 50, 50, 50],
+                label: '',
+                data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
             }]
         },
         options: {
@@ -925,17 +1567,90 @@
             },
             scales: {
                 A:{
+                    ticks: {
+                          callback: function(val, index) {
+                              return val;
+                          },
+                        },
                         display: true,
                         type:'linear',
                         position:'right',
-                        //ticks: { beginAtZero: true, color: 'blue' },
-                        //grid: { display: false }
                     },
                 B: {
+                    ticks: {
+                          callback: function(val, index) {
+                              return val;
+                          },
+                        },
                         display: true,
                         type:'linear',
                         position:'left',
-                        //ticks: { beginAtZero: true, color: 'blue' },
+                        grid: { display: false }
+                    }
+                
+            },
+            responsive: true,
+            maintainAspectRatio: false,
+            barThickness: 10
+        },
+        plugins: [htmlLegendPlugin]
+    });
+
+    
+    var chart4Origin = new Chart(document.getElementById("chart4Origin"), {
+        type: 'line',
+        data: {
+            labels: [''],
+            datasets: [{
+                type: 'bar',
+                label: '',
+                data: [0]
+            }, {
+                type: 'line',
+                label: '',
+                data: [0],
+            }]
+        },
+        options: {
+            layout: {
+            padding: {
+                top: 30,
+                bottom:30,
+                left:30,
+                right:30
+                }
+            },
+            plugins: {
+                datalabels: {
+                    display: false
+                },
+                legend: {
+                    display: false,
+                },
+                htmlLegend: {
+                    containerID: 'legend-div-chart4-origin',
+                }
+            },
+            scales: {
+                A:{
+                    ticks: {
+                          callback: function(val, index) {
+                              return val;
+                          },
+                        },
+                        display: true,
+                        type:'linear',
+                        position:'right',
+                    },
+                B: {
+                    ticks: {
+                          callback: function(val, index) {
+                              return val;
+                          },
+                        },
+                        display: true,
+                        type:'linear',
+                        position:'left',
                         grid: { display: false }
                     }
                 
